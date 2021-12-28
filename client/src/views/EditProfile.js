@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams, Redirect } from 'react-router-dom';
-import ReactLoading from 'react-loading';
-import '../components/EditProfile/EditProfile.css';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
+import ReactLoading from 'react-loading'
+import '../components/EditProfile/EditProfile.css'
+import styled from 'styled-components'
+import config from '../helpers/constants'
 
-const axios = require('axios');
+const axios = require('axios')
+
+const BASE_URL = config.url.API_URL
 
 const TextArea = styled.textarea`
     font-family: 'Poppins';
@@ -19,68 +22,66 @@ const TextArea = styled.textarea`
     outline: none;
     padding: 10px 10px 10px 20px;
     margin: 10px 0px;
-`;
+`
 
 const EditProfile = ({ account }) => {
     const [user, setUser] = useState({
         id: account,
         name: '',
         username: '',
-        about: '',
-    });
-    const [Loading, setLoading] = useState(false);
+        about: ''
+    })
+    const [Loading, setLoading] = useState(false)
 
-    let history = useHistory();
-    const { id } = useParams();
+    let history = useHistory()
+    const { id } = useParams()
 
     const getUserData = async () => {
-        console.log('id:', id);
-        console.log('account:', account);
+        console.log('id:', id)
+        console.log('account:', account)
         try {
-            const url_get = `https://prnts-music-nfts.herokuapp.com/api/users/${account}`;
-            const { data } = await axios.get(url_get);
+            const url_get = `${BASE_URL}/api/users/${account}`
+            const { data } = await axios.get(url_get)
             let user = {
                 id: account,
                 name: data.name,
                 username: data.username,
-                about: data.about,
-            };
-            setUser(user);
+                about: data.about
+            }
+            setUser(user)
         } catch (err) {}
-    };
+    }
 
     useEffect(() => {
         if (account && id !== account) {
-            history.push(`/artists/${account}/edit-profile`);
-            window.location.reload();
+            history.push(`/artists/${account}/edit-profile`)
+            window.location.reload()
         }
-        getUserData();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        getUserData()
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     const editUserProfile = async (e) => {
         // e.preventDefault();
-        setLoading(true);
+        setLoading(true)
         try {
-            const url_get = `https://prnts-music-nfts.herokuapp.com/api/users/${account}`;
-            const get_res = await axios.get(url_get);
+            const url_get = `${BASE_URL}/api/users/${account}`
 
-            const res = await axios.patch(url_get, user);
-            console.log(res.data);
+            const res = await axios.patch(url_get, user)
+            console.log(res.data)
         } catch (err) {
             try {
-                const url_post =
-                    'https://prnts-music-nfts.herokuapp.com/api/users';
-                const res = await axios.post(url_post, user);
-                console.log(res.data);
+                const url_post = `${BASE_URL}/api/users`
+                const res = await axios.post(url_post, user)
+                console.log(res.data)
             } catch (err) {
-                console.log(err);
-                setLoading(false);
+                console.log(err)
+                setLoading(false)
             }
         }
-        history.push(`/artists/${user.id}`);
+        history.push(`/artists/${user.id}`)
 
-        setLoading(false);
-    };
+        setLoading(false)
+    }
 
     return (
         <div className="edit-profile-container">
@@ -98,8 +99,8 @@ const EditProfile = ({ account }) => {
                             onChange={(e) => {
                                 setUser({
                                     ...user,
-                                    name: e.target.value,
-                                });
+                                    name: e.target.value
+                                })
                             }}
                         />
                     </div>
@@ -112,8 +113,8 @@ const EditProfile = ({ account }) => {
                             onChange={(e) => {
                                 setUser({
                                     ...user,
-                                    username: e.target.value,
-                                });
+                                    username: e.target.value
+                                })
                             }}
                         />
                     </div>
@@ -143,8 +144,8 @@ const EditProfile = ({ account }) => {
                         onChange={(e) => {
                             setUser({
                                 ...user,
-                                about: e.target.value,
-                            });
+                                about: e.target.value
+                            })
                         }}
                     />
                 </div>
@@ -159,7 +160,7 @@ const EditProfile = ({ account }) => {
                 </button>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default EditProfile;
+export default EditProfile

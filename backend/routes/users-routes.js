@@ -1,20 +1,20 @@
-const express = require('express');
-const { check } = require('express-validator');
+const express = require('express')
+const { check } = require('express-validator')
 
-const userControllers = require('../controllers/users-controller');
+const userControllers = require('../controllers/users-controller')
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/:uid', userControllers.getUserById);
+router.get('/:uid', userControllers.getUserById)
 
 router.post(
-    '/',
-    [check('about').isLength({ max: 500 })], // Array of middlewares checking for validation
-    userControllers.createUser
-);
+  '/',
+  [check('about').isLength({ max: 500 })], // Array of middlewares checking for validation
+  userControllers.createUser
+)
 
-router.patch('/:uid', userControllers.updateUserData);
+router.patch('/:uid', userControllers.updateUserData)
 
-router.delete('/:uid', userControllers.deleteUser);
+router.delete('/:uid', userControllers.deleteUser)
 
-module.exports = router;
+module.exports = router

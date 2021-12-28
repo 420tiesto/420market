@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import './Bids.css';
+import './Bids.css'
 
 const Bids = ({ title, by, address }) => {
     return (
@@ -16,7 +16,7 @@ const Bids = ({ title, by, address }) => {
                 </Link>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Bids;
+export default Bids

@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './NotApproved.css';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import './NotApproved.css'
+import config from '../../../helpers/constants'
 
-const axios = require('axios');
+const axios = require('axios')
+
+const BASE_URL = config.url.API_URL
 
 const NotApproved = ({ account }) => {
-    const [isRequestSent, setIsRequestSent] = useState(false);
+    const [isRequestSent, setIsRequestSent] = useState(false)
     useEffect(() => {
         const getIsRequestSent = async () => {
-            const url = `https://prnts-music-nfts.herokuapp.com/api/approvalRequests/${account}`;
-            const { data } = await axios.get(url);
-            setIsRequestSent(data.isRequestSent);
-        };
-        getIsRequestSent();
-    }, []);
+            const url = `${BASE_URL}/api/approvalRequests/${account}`
+            const { data } = await axios.get(url)
+            setIsRequestSent(data.isRequestSent)
+        }
+        getIsRequestSent()
+    }, [])
     return (
         <div className="container">
             {isRequestSent ? (
-                <div style={{ marginBottom: '20px' }}>
-                    We are processing your request...
-                </div>
+                <div style={{ marginBottom: '20px' }}>We are processing your request...</div>
             ) : null}
 
             <div className="btn approval-request">
@@ -34,7 +35,7 @@ const NotApproved = ({ account }) => {
                 </Link>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default NotApproved;
+export default NotApproved

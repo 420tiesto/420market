@@ -1,7 +1,7 @@
-import React from 'react';
-import './Card.css';
+import React from 'react'
+import './Card.css'
 // import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const Card = ({ imageUrl, title, price, username, editions }) => {
     return (
@@ -12,12 +12,9 @@ const Card = ({ imageUrl, title, price, username, editions }) => {
             <div className="card-title">
                 <b>{title}</b>
                 <div className="creator">
-                    <i style={{ paddingRight: '10px', fontFamily: 'cursive' }}>
-                        Artist:
-                    </i>
+                    <i style={{ paddingRight: '10px', fontFamily: 'cursive' }}>Artist:</i>
                     <h4 className="artist-link">
-                        @
-                        {`${username.slice(0, 6)}....${username.slice(-7, -1)}`}
+                        @{`${username.slice(0, 6)}....${username.slice(-7, -1)}`}
                     </h4>
                 </div>
             </div>
@@ -28,19 +25,19 @@ const Card = ({ imageUrl, title, price, username, editions }) => {
                 <b>Worth: {price}</b>
             </div>
         </div>
-    );
-};
+    )
+}
 
 Card.defaultProps = {
     title: '#Bad Trip',
     price: '1ETH',
-    username: 'anonymus',
-};
+    username: 'anonymus'
+}
 
 Card.propTypes = {
     title: PropTypes.string,
     price: PropTypes.string.isRequired,
-    username: PropTypes.string,
-};
+    username: PropTypes.string
+}
 
-export default Card;
+export default Card

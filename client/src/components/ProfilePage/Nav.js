@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Nav = ({ id, isMobile }) => {
     return (
@@ -14,11 +14,7 @@ const Nav = ({ id, isMobile }) => {
                 </NavLink>
             </div>
             <div className="nav-lnk">
-                <NavLink
-                    exact
-                    to={`/artists/${id}/collections`}
-                    activeClassName="selected"
-                >
+                <NavLink exact to={`/artists/${id}/collections`} activeClassName="selected">
                     {isMobile ? (
                         <h4 className="link-cc">Collections</h4>
                     ) : (
@@ -27,7 +23,7 @@ const Nav = ({ id, isMobile }) => {
                 </NavLink>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Nav;
+export default Nav

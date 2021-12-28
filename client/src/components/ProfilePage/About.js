@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const About = ({ about }) => {
     return (
@@ -9,7 +9,7 @@ const About = ({ about }) => {
             launched. */}
             {about}
         </div>
-    );
-};
+    )
+}
 
-export default About;
+export default About

@@ -1,5 +1,5 @@
-import web3 from './web3';
-import PrntNFTData from './build/PrntNFTData.json';
+import web3 from './web3'
+import PrntNFTData from './build/PrntNFTData.json'
 
 const instance = new web3.eth.Contract(
     PrntNFTData.abi,
@@ -9,6 +9,6 @@ const instance = new web3.eth.Contract(
     // '0x021a4474139Aa2E008d9A73ce56D58433c76fdB7'
     // '0xB4A1faB075DD1881Eda6057F2660e67B683Ac810'
     '0x66Ff614aF38a8F698F7E7Dc691EE3360bF0a4cb7'
-);
+)
 
-export default instance;
+export default instance

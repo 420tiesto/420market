@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import ReactLoading from 'react-loading';
-import { withRouter } from 'react-router';
-import './ApproveModal.css';
-import PrntNFTMarketplace from '../../../ethereum/PrntNFTMarketplace';
-import web3 from '../../../ethereum/web3';
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+import ReactLoading from 'react-loading'
+import { withRouter } from 'react-router'
+import './ApproveModal.css'
+import PrntNFTMarketplace from '../../../ethereum/PrntNFTMarketplace'
+import web3 from '../../../ethereum/web3'
 
 const Modal = ({
     isShowing,
@@ -15,47 +15,41 @@ const Modal = ({
     instance,
     isApproved,
     account,
-    totalOwners,
+    totalOwners
 }) => {
-    const [Approving, setApproving] = useState(false);
-    const [Trading, setTrading] = useState(false);
-    const [newPrice, setnewPrice] = useState('');
+    const [Approving, setApproving] = useState(false)
+    const [Trading, setTrading] = useState(false)
+    const [newPrice, setnewPrice] = useState('')
 
     const onApprove = async () => {
         try {
-            console.log(instance);
-            console.log(PRNT_NFT_MARKETPLACE);
-            console.log(account);
-            setApproving(true);
-            await instance.methods
-                .setApprovalForAll(PRNT_NFT_MARKETPLACE, true)
-                .send({
-                    from: account,
-                });
+            console.log(instance)
+            console.log(PRNT_NFT_MARKETPLACE)
+            console.log(account)
+            setApproving(true)
+            await instance.methods.setApprovalForAll(PRNT_NFT_MARKETPLACE, true).send({
+                from: account
+            })
             // alert("Approved!!")
-            setApproving(false);
-            window.location.reload();
+            setApproving(false)
+            window.location.reload()
         } catch (err) {
-            console.log(err);
-            alert('Approve not working..');
-            setApproving(false);
-            window.location.reload();
+            console.log(err)
+            alert('Approve not working..')
+            setApproving(false)
+            window.location.reload()
         }
-    };
+    }
 
     const onOpenTrade = async () => {
         // const newPrice = 10000; // wei
         try {
-            setTrading(true);
+            setTrading(true)
             totalOwners !== 1
                 ? await PrntNFTMarketplace.methods
-                      .openTrade(
-                          id,
-                          tokenId,
-                          web3.utils.toWei(newPrice, 'ether')
-                      )
+                      .openTrade(id, tokenId, web3.utils.toWei(newPrice, 'ether'))
                       .send({
-                          from: account,
+                          from: account
                       })
                 : await PrntNFTMarketplace.methods
                       .openTradeWhenCreateNewPrntNFT(
@@ -64,18 +58,18 @@ const Modal = ({
                           web3.utils.toWei(newPrice, 'ether')
                       )
                       .send({
-                          from: account,
-                      });
-            setTrading(false);
+                          from: account
+                      })
+            setTrading(false)
             // alert("NFT open for trade")
-            window.location.reload();
+            window.location.reload()
         } catch (err) {
-            console.log(err);
-            setTrading(false);
-            alert('open trade not working..');
-            window.location.reload();
+            console.log(err)
+            setTrading(false)
+            alert('open trade not working..')
+            window.location.reload()
         }
-    };
+    }
 
     return isShowing
         ? ReactDOM.createPortal(
@@ -89,10 +83,7 @@ const Modal = ({
                       tabIndex={-1}
                       role="dialog"
                   >
-                      <div
-                          className="modal"
-                          onClick={(e) => e.stopPropagation()}
-                      >
+                      <div className="modal" onClick={(e) => e.stopPropagation()}>
                           <div className="modal-header">
                               <button
                                   type="button"
@@ -109,9 +100,8 @@ const Modal = ({
                                   {!isApproved ? (
                                       <>
                                           <p className="content-title">
-                                              To open your NFT for trade you
-                                              have to give approval to the smart
-                                              contract.
+                                              To open your NFT for trade you have to give approval
+                                              to the smart contract.
                                           </p>
                                           <br />
                                           <button
@@ -119,9 +109,7 @@ const Modal = ({
                                               onClick={onApprove}
                                               disabled={isApproved}
                                               style={{
-                                                  color: isApproved
-                                                      ? 'grey'
-                                                      : 'black',
+                                                  color: isApproved ? 'grey' : 'black'
                                               }}
                                           >
                                               {/* Approve */}
@@ -140,7 +128,7 @@ const Modal = ({
                                           style={{
                                               color: '#a3d0d2db',
                                               alignSelf: 'center',
-                                              justifySelf: 'center',
+                                              justifySelf: 'center'
                                           }}
                                       >
                                           Approved!
@@ -155,15 +143,11 @@ const Modal = ({
                                               <input
                                                   className="user-input"
                                                   style={{
-                                                      width: '250px',
+                                                      width: '250px'
                                                   }}
                                                   placeholder="Trade price in ETH"
                                                   value={newPrice}
-                                                  onChange={(e) =>
-                                                      setnewPrice(
-                                                          e.target.value
-                                                      )
-                                                  }
+                                                  onChange={(e) => setnewPrice(e.target.value)}
                                               />
                                           </div>
                                       ) : (
@@ -176,16 +160,12 @@ const Modal = ({
                                       onClick={onOpenTrade}
                                       disabled={!isApproved}
                                       style={{
-                                          color: !isApproved ? 'grey' : 'black',
+                                          color: !isApproved ? 'grey' : 'black'
                                       }}
                                   >
                                       {/* Open for trade */}
                                       {Trading && (
-                                          <ReactLoading
-                                              type="bubbles"
-                                              height={30}
-                                              width={30}
-                                          />
+                                          <ReactLoading type="bubbles" height={30} width={30} />
                                       )}
                                       {!Trading && <h4>Open for Trade</h4>}
                                   </button>
@@ -196,7 +176,7 @@ const Modal = ({
               </React.Fragment>,
               document.body
           )
-        : null;
-};
+        : null
+}
 
-export default withRouter(Modal);
+export default withRouter(Modal)

@@ -1,8 +1,8 @@
-import React from 'react';
-import profile from '../../assets/images/default-profile.jpg';
+import React from 'react'
+import profile from '../../assets/images/default-profile.jpg'
 
 const Profile = ({ name, username, ethAddress, Id }) => {
-    const address = ethAddress.slice(0, 6) + '.....' + ethAddress.slice(-7);
+    const address = ethAddress.slice(0, 6) + '.....' + ethAddress.slice(-7)
 
     return (
         <div>
@@ -29,14 +29,14 @@ const Profile = ({ name, username, ethAddress, Id }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 Profile.defaultProps = {
     // name: "Jack Butcher",
     // username: "anonymus",
     // ethAddress: "0x09a9601349928e391fB12BAb0270999d189072EE",
-    Id: ' ID',
-};
+    Id: ' ID'
+}
 
-export default Profile;
+export default Profile

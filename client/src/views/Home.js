@@ -1,12 +1,14 @@
-import React from 'react';
-import Body from '../components/Home/Body';
-import Artworks from './Artworks';
-import '../components/Home/Home.css';
-import styled from 'styled-components';
+import React from 'react'
+
+import Artworks from './Artworks'
+
+import Body from '../components/Home/Body'
+import '../components/Home/Home.css'
+import styled from 'styled-components'
 
 const Container = styled.div`
     display: grid;
-`;
+`
 
 const Home = () => {
     return (
@@ -24,7 +26,7 @@ const Home = () => {
                 <Artworks />
             </Container>
         </div>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home
