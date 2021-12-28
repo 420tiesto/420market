@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import ReactLoading from 'react-loading';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-const axios = require('axios');
+import React, { useEffect, useState } from 'react'
+import ReactLoading from 'react-loading'
+import { useHistory } from 'react-router-dom'
+import config from '../helpers/constants'
+import styled from 'styled-components'
+
+const axios = require('axios')
+
+const BASE_URL = config.url.API_URL
 
 const Container = styled.div`
     margin: auto;
@@ -15,13 +19,13 @@ const Container = styled.div`
     width: fit-content;
     padding: 30px 5vw;
     border-radius: 30px;
-`;
+`
 
 const Form = styled.form`
     margin-top: 40px;
     display: grid;
     justify-items: center;
-`;
+`
 
 const Input = styled.input`
     font-family: 'Poppins';
@@ -35,7 +39,7 @@ const Input = styled.input`
     outline: none;
     padding: 10px 10px 10px 20px;
     margin: 10px 0px;
-`;
+`
 
 const TextArea = styled.textarea`
     font-family: 'Poppins';
@@ -50,63 +54,63 @@ const TextArea = styled.textarea`
     outline: none;
     padding: 10px 10px 10px 20px;
     margin: 10px 0px;
-`;
+`
 
-const RequestForApproval = ({ account }) => {
+const RequestForApproval = (props) => {
     const [links, setLinks] = useState({
         twitter: '',
         instagram: '',
         email: '',
         website: '',
-        other: '',
-    });
-    const [description, setDescription] = useState('');
-    const [doRequestExist, setDoRequestExist] = useState(false);
-    const [Loading, setLoading] = useState(false);
+        other: ''
+    })
+    const [description, setDescription] = useState('')
+    const [doRequestExist, setDoRequestExist] = useState(false)
+    const [Loading, setLoading] = useState(false)
 
-    let history = useHistory();
+    let history = useHistory()
 
     const getRequestData = async () => {
-        const url = `https://prnts-music-nfts.herokuapp.com/api/approvalRequests/${account}`;
+        const url = `${BASE_URL}/api/approvalRequests/${props.account}`
         try {
-            const { data } = await axios.get(url);
-            setLinks(data.request.links);
-            setDescription(data.request.description);
-            setDoRequestExist(true);
+            const { data } = await axios.get(url)
+            setLinks(data.request.links)
+            setDescription(data.request.description)
+            setDoRequestExist(true)
         } catch (err) {}
-    };
+    }
 
     useEffect(() => {
-        getRequestData();
-    }, []);
+        getRequestData()
+    }, [])
 
     const sendApprovalRequest = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        const url_post =
-            'https://prnts-music-nfts.herokuapp.com/api/approvalRequests';
-        const url_get = `https://prnts-music-nfts.herokuapp.com/api/approvalRequests/${account}`;
+        e.preventDefault()
+        setLoading(true)
+        const url_post = `${BASE_URL}/api/approvalRequests`
+        const url_get = `${BASE_URL}/api/approvalRequests/${props.account}`
         const ApprovalRequest = {
-            id: account,
+            id: props.account,
             links,
-            description,
-        };
+            description
+        }
         try {
             if (doRequestExist) {
-                const res = await axios.patch(url_get, ApprovalRequest);
-                console.log(res);
+                const res = await axios.patch(url_get, ApprovalRequest)
+                console.log(res)
             } else {
-                const res = await axios.post(url_post, ApprovalRequest);
+                const res = await axios.post(url_post, ApprovalRequest)
+                console.log(res)
             }
 
             // console.log(res.data);
         } catch (err) {
-            console.log(err);
-            setLoading(false);
-            return;
+            console.log(err)
+            setLoading(false)
+            return
         }
-        history.push('/music');
-    };
+        history.push('/music')
+    }
 
     return (
         <Container>
@@ -119,7 +123,7 @@ const RequestForApproval = ({ account }) => {
                     onChange={(e) =>
                         setLinks({
                             ...links,
-                            twitter: e.target.value,
+                            twitter: e.target.value
                         })
                     }
                 />
@@ -130,7 +134,7 @@ const RequestForApproval = ({ account }) => {
                     onChange={(e) =>
                         setLinks({
                             ...links,
-                            instagram: e.target.value,
+                            instagram: e.target.value
                         })
                     }
                 />
@@ -142,7 +146,7 @@ const RequestForApproval = ({ account }) => {
                     onChange={(e) =>
                         setLinks({
                             ...links,
-                            email: e.target.value,
+                            email: e.target.value
                         })
                     }
                 />
@@ -153,7 +157,7 @@ const RequestForApproval = ({ account }) => {
                     onChange={(e) =>
                         setLinks({
                             ...links,
-                            website: e.target.value,
+                            website: e.target.value
                         })
                     }
                 />
@@ -164,7 +168,7 @@ const RequestForApproval = ({ account }) => {
                     onChange={(e) =>
                         setLinks({
                             ...links,
-                            other: e.target.value,
+                            other: e.target.value
                         })
                     }
                 />
@@ -189,7 +193,7 @@ const RequestForApproval = ({ account }) => {
                 </button>
             </Form>
         </Container>
-    );
-};
+    )
+}
 
-export default RequestForApproval;
+export default RequestForApproval

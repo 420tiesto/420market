@@ -1,0 +1,121 @@
+.map-wrapper {
+    margin-top: 14vh;
+    padding: 10px;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    overflow: hidden;
+}
+
+.map-wrapper-mobile {
+    padding: 10px;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    overflow: hidden;
+}
+
+.map-container {
+    width: auto;
+    padding: 10px;
+    margin-bottom: auto;
+    position: relative;
+    border-radius: 18px;
+    cursor: pointer;
+    justify-content: center;
+    justify-items: center;
+    transition-duration: 1s;
+    background: #e9eff0;
+    box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
+}
+
+.map-control-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;    
+}
+
+.map-control-container-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;    
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-edit-mode-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+  }
+
+.map-component-container {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    padding: 10px;
+    border-radius: 18px;
+    cursor: pointer;
+    justify-content: center;
+    justify-items: center;
+    background: #e9eff0;
+    box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
+  }
+
+  .marker-edit-mode-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .marker-form-title {
+    text-align: center;
+    font-size: medium;
+    padding: 20px 0px;
+    letter-spacing: 0.5px;
+}
+
+.detail-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.new-title-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.marker-input {
+    /* text-align: center; */
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 16px;
+    width: 320px;
+    background: #e9eff0;
+    box-shadow: inset 5px 5px 12px #dbe1e2, inset -5px -5px 12px #f7fdfe;
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    padding: 10px 10px 10px 20px;
+    margin: 10px 0px;
+}

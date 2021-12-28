@@ -1,10 +1,13 @@
 const { buildAuthenticatedRouter } = require('admin-bro-expressjs');
 const bcrypt = require('bcrypt');
 const Admin = require('../../models/admin');
-// const mongoose = require('mongoose');
-// const session = require('express-session');
-// const MongoStore = require('connect-mongo');
-// const { pwd } = require('../../config');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const { pwd } = require('../../config');
+
+console.log("Admin Router working...")
+const url = `mongodb+srv://mortyneous:${pwd}@cluster0.w56sg.mongodb.net/MortyDB?retryWrites=true&w=majority`
 
 const buildAdminRouter = (adminBro) => {
     const router = buildAuthenticatedRouter(
@@ -31,10 +34,10 @@ const buildAdminRouter = (adminBro) => {
         {
             resave: false,
             saveUninitialized: true,
-            // store: MongoStore.create({
-            //     mongoUrl: `mongodb+srv://Disha:${pwd}@prnts.l6zjm.mongodb.net/prnts_test?retryWrites=true&w=majority`,
-            //     // mongooseConnection: mongoose.connection,
-            // }),
+            store: MongoStore.create({
+                mongoUrl: url,
+                mongooseConnection: mongoose.connection,
+            }),
         }
     );
     return router;

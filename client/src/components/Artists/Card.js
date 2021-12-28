@@ -1,9 +1,9 @@
-import React from 'react';
-import profile from '../../assets/images/profile.png';
-import default_profile from '../../assets/images/default-profile.jpg';
+import React from 'react'
+import profile from '../../assets/images/profile.png'
+import default_profile from '../../assets/images/default-profile.jpg'
 
 const Card = ({ imageUrl, description, name, ethAddress }) => {
-    const address = ethAddress.slice(0, 7) + '....' + ethAddress.slice(-7);
+    const address = ethAddress.slice(0, 7) + '....' + ethAddress.slice(-7)
     return (
         <div className="artist-card-container">
             <div className="artist-img-border">
@@ -23,15 +23,15 @@ const Card = ({ imageUrl, description, name, ethAddress }) => {
                 {/* Music Artist. Rapper. */}
             </div>
         </div>
-    );
-};
+    )
+}
 
-const profile_image = [profile, default_profile];
+const profile_image = [profile, default_profile]
 
 Card.defaultProps = {
     ethAddress: '',
     // imageUrl: profile_image[Math.round(Math.random())]
-    imageUrl: profile_image[0],
-};
+    imageUrl: profile_image[0]
+}
 
-export default Card;
+export default Card

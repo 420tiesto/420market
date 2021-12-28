@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
-import PropTypes from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState } from 'react'
+import { FaBars } from 'react-icons/fa'
+import PropTypes from 'prop-types'
+import { Link, NavLink } from 'react-router-dom'
 // import MetaMaskOnboarding from '@metamask/onboarding'
 // import web3 from '../ethereum/web3';
-import styled from 'styled-components';
-import './Dropdown.css';
-import prntsLogo from '../../assets/images/prnts-logo.png';
+import styled from 'styled-components'
+import './Dropdown.css'
+import prntsLogo from '../../assets/images/prnts-logo.png'
 
 const Header = ({ account, isMobile }) => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false)
 
     const refreshPage = async () => {
-        window.location.reload();
-    };
+        window.location.reload()
+    }
 
     const Navbar = {
         Wrapper: styled.nav`
@@ -59,8 +59,8 @@ const Header = ({ account, isMobile }) => {
             border-radius: 24px;
             background: rgb(233 239 240);
             box-shadow: 5px 5px 13px #e6e6e6, -5px -5px 13px #f4f4f4;
-        `,
-    };
+        `
+    }
 
     const MobileNavbar = {
         Wrapper: styled(Navbar.Wrapper)`
@@ -93,8 +93,8 @@ const Header = ({ account, isMobile }) => {
             padding: 8px 12px;
             font-size: 12px;
             border-radius: 15px;
-        `,
-    };
+        `
+    }
 
     return (
         <div>
@@ -107,41 +107,44 @@ const Header = ({ account, isMobile }) => {
                                     src={prntsLogo}
                                     style={{
                                         height: '35px',
-                                        width: 'auto',
+                                        width: 'auto'
                                     }}
                                 />
                             </MobileNavbar.Logo>
                         </NavLink>
 
                         <MobileNavbar.Items className="nav-links">
-                            {!(
-                                account === '' || typeof account === 'undefined'
-                            ) ? (
+                            {!(account === '' || typeof account === 'undefined') ? (
                                 <div
                                     className="dropdown"
-                                    onClick={() =>
-                                        setDropdownOpen(!dropdownOpen)
-                                    }
+                                    onClick={() => setDropdownOpen(!dropdownOpen)}
                                 >
                                     <FaBars color="black" className="dropbtn" />
                                     <div
                                         className="dropdown-content"
                                         style={{
-                                            display: dropdownOpen
-                                                ? 'grid'
-                                                : 'none',
+                                            display: dropdownOpen ? 'grid' : 'none'
                                         }}
                                     >
                                         <div>
-                                            <div onClick={refreshPage}>
-                                                <Link
-                                                    to={`/artists/${account}`}
-                                                >
+                                            <div>
+                                                <Link to={`/map/${account}`}>
                                                     <h4
                                                         // className="link-2"
                                                         style={{
-                                                            padding:
-                                                                '10px 20px',
+                                                            padding: '10px 20px'
+                                                        }}
+                                                    >
+                                                        Stores at Map
+                                                    </h4>
+                                                </Link>
+                                            </div>
+                                            <div onClick={refreshPage}>
+                                                <Link to={`/artists/${account}`}>
+                                                    <h4
+                                                        // className="link-2"
+                                                        style={{
+                                                            padding: '10px 20px'
                                                         }}
                                                     >
                                                         Profile
@@ -154,8 +157,7 @@ const Header = ({ account, isMobile }) => {
                                                     <h4
                                                         // className="link-2"
                                                         style={{
-                                                            padding:
-                                                                '10px 20px',
+                                                            padding: '10px 20px'
                                                         }}
                                                     >
                                                         Create
@@ -177,27 +179,13 @@ const Header = ({ account, isMobile }) => {
               </h4> */}
 
                             <NavLink exact to="/" activeClassName="selected">
-                                <MobileNavbar.Item className="lnk">
-                                    Home
-                                </MobileNavbar.Item>
+                                <MobileNavbar.Item className="lnk">Home</MobileNavbar.Item>
                             </NavLink>
-                            <NavLink
-                                exact
-                                to="/music"
-                                activeClassName="selected"
-                            >
-                                <MobileNavbar.Item className="lnk">
-                                    Music & More
-                                </MobileNavbar.Item>
+                            <NavLink exact to="/music" activeClassName="selected">
+                                <MobileNavbar.Item className="lnk">Music & More</MobileNavbar.Item>
                             </NavLink>
-                            <NavLink
-                                exact
-                                to="/artists"
-                                activeClassName="selected"
-                            >
-                                <MobileNavbar.Item className="lnk">
-                                    Artists
-                                </MobileNavbar.Item>
+                            <NavLink exact to="/artists" activeClassName="selected">
+                                <MobileNavbar.Item className="lnk">Artists</MobileNavbar.Item>
                             </NavLink>
                             {/* {
                 account === null
@@ -218,7 +206,7 @@ const Header = ({ account, isMobile }) => {
                                         src={prntsLogo}
                                         style={{
                                             height: '45px',
-                                            width: 'auto',
+                                            width: 'auto'
                                         }}
                                     />
                                 </Navbar.Logo>
@@ -234,25 +222,13 @@ const Header = ({ account, isMobile }) => {
                                 </Navbar.Item>
                                 <Navbar.Item className="link-1">Music</Navbar.Item>
                                 <Navbar.Item className="link-1">Artists</Navbar.Item> */}
-                                <NavLink
-                                    exact
-                                    to="/"
-                                    activeClassName="selected"
-                                >
+                                <NavLink exact to="/" activeClassName="selected">
                                     <h3 className="link-1">Home</h3>
                                 </NavLink>
-                                <NavLink
-                                    exact
-                                    to="/music"
-                                    activeClassName="selected"
-                                >
+                                <NavLink exact to="/music" activeClassName="selected">
                                     <h3 className="link-1">Music & More</h3>
                                 </NavLink>
-                                <NavLink
-                                    exact
-                                    to="/artists"
-                                    activeClassName="selected"
-                                >
+                                <NavLink exact to="/artists" activeClassName="selected">
                                     <h3 className="link-1">Artists</h3>
                                 </NavLink>
                             </Navbar.Items>
@@ -261,12 +237,16 @@ const Header = ({ account, isMobile }) => {
                             style={{
                                 margin: '0px 0px 20px 10px',
                                 right: '10px',
-                                position: 'relative',
+                                position: 'relative'
                             }}
                         >
-                            {account === '' ||
-                            typeof account === 'undefined' ? null : ( // <ConnectWallet isMobile={isMobile} account={account} /> // <button className="btn" id="connect wallet">Connect Wallet</button>
+                            {account === '' || typeof account === 'undefined' ? null : ( // <ConnectWallet isMobile={isMobile} account={account} /> // <button className="btn" id="connect wallet">Connect Wallet</button>
                                 <div className="profile-links">
+                                    <div>
+                                        <Link to={`/map/${account}`}>
+                                            <h4 className="link-2">Stores at Map</h4>
+                                        </Link>
+                                    </div>
                                     <div onClick={refreshPage}>
                                         <Link to={`/artists/${account}`}>
                                             <h4 className="link-2">Profile</h4>
@@ -344,20 +324,20 @@ const Header = ({ account, isMobile }) => {
                 // </header>)
             }
         </div>
-    );
-};
+    )
+}
 
 Header.defaultProps = {
-    title: 'Music Nfts',
-};
+    title: 'Music Nfts'
+}
 
 Header.propTypes = {
-    title: PropTypes.string.isRequired,
-};
+    title: PropTypes.string.isRequired
+}
 
 // const logoStyle = {
 //     color: 'black',
 //     letterSpacing: -2
 // }
 
-export default Header;
+export default Header

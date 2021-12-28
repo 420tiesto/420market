@@ -1,5 +1,5 @@
-import web3 from './web3';
-import PrntNFTMarketplace from './build/PrntNFTMarketplace.json';
+import web3 from './web3'
+import PrntNFTMarketplace from './build/PrntNFTMarketplace.json'
 
 const instance = new web3.eth.Contract(
     PrntNFTMarketplace.abi,
@@ -9,6 +9,6 @@ const instance = new web3.eth.Contract(
     // '0xc948e3470b72b92f5C93Bf600B59682a32Db7370'
     // '0xBE290E5D5E1d9d9d145F5ED65a67e1C807179EC2'
     '0xA55a8F2016dc3b8959435637095C0F85a6640A5D'
-);
+)
 
-export default instance;
+export default instance

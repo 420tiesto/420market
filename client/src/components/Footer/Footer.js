@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaTwitter, FaDiscord, FaInstagram, FaGithub } from 'react-icons/fa';
-import './Footer.css';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { FaTwitter, FaDiscord, FaInstagram, FaGithub } from 'react-icons/fa'
+import './Footer.css'
 
 const Footer = () => {
     return (
@@ -14,10 +14,7 @@ const Footer = () => {
                 <Link to={{ pathname: 'https://discord.com' }} target="_blank">
                     <FaDiscord size={38} className="footer-logo" />
                 </Link>
-                <Link
-                    to={{ pathname: 'https://instagram.com' }}
-                    target="_blank"
-                >
+                <Link to={{ pathname: 'https://instagram.com' }} target="_blank">
                     <FaInstagram size={38} className="footer-logo" />
                 </Link>
                 <Link to={{ pathname: 'https://github.com' }} target="_blank">
@@ -38,7 +35,7 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Footer;
+export default Footer

@@ -40,16 +40,7 @@
 }
 
 .bid-val a p:hover {
-    background-image: linear-gradient(
-        to right,
-        red,
-        orange,
-        yellow,
-        green,
-        blue,
-        indigo,
-        violet
-    );
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
     transform: scale(1.02, 1.02);
     /* background-clip: inherit; */
     /* -webkit-background-clip: text; */

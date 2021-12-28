@@ -47,12 +47,11 @@
     transition-property: all;
     transition-duration: 0.4s;
     transition-timing-function: ease-in;
-
 }
 
 .terms-right a h4:hover {
-  color: rgb(109, 109, 109);
-  transform: scale(1.05, 1.05);
+    color: rgb(109, 109, 109);
+    transform: scale(1.05, 1.05);
 }
 
 .footer-logo {
@@ -60,14 +59,14 @@
     background: #e9eff0;
     box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
     padding: 10px 10px;
-    border-radius: 10px;    
+    border-radius: 10px;
     transition-property: all;
     transition-duration: 0.4s;
     transition-timing-function: ease-in;
 }
 
 .footer-logo:hover {
-  box-shadow: inset 5px 5px 12px #dbe1e2, inset -5px -5px 12px #f7fdfe;
-  color: rgb(109, 109, 109);
-  transform: scale(1.05, 1.05);
+    box-shadow: inset 5px 5px 12px #dbe1e2, inset -5px -5px 12px #f7fdfe;
+    color: rgb(109, 109, 109);
+    transform: scale(1.05, 1.05);
 }

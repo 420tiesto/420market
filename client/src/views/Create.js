@@ -1,43 +1,43 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import ReactLoading from 'react-loading';
-import '../components/Create/Create.css';
-import web3 from '../ethereum/web3';
-import PrntNFTFactory from '../ethereum/PrntNFTFactory';
-import PreviewCard from '../components/Artworks/Card/Card';
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import ReactLoading from 'react-loading'
+import '../components/Create/Create.css'
+import web3 from '../ethereum/web3'
+import PrntNFTFactory from '../ethereum/PrntNFTFactory'
+import PreviewCard from '../components/Artworks/Card/Card'
 // import { isMobile } from 'web3modal';
 
-const axios = require('axios');
-const FormData = require('form-data');
+const axios = require('axios')
+const FormData = require('form-data')
 
 const Create = ({ account, isMobile }) => {
-    const pinataApiKey = process.env.REACT_APP_PINATA_API_KEY;
-    const pinataSecretApiKey = process.env.REACT_APP_PINATA_SECRET_API_KEY;
+    const pinataApiKey = process.env.REACT_APP_PINATA_API_KEY
+    const pinataSecretApiKey = process.env.REACT_APP_PINATA_SECRET_API_KEY
 
-    const [name, setname] = useState('');
-    const [symbol, setsymbol] = useState('');
-    const [description, setdescription] = useState('');
-    const [royalties, setRoyalties] = useState('');
-    const [editions, setEditions] = useState('');
-    const [price, setprice] = useState('');
+    const [name, setname] = useState('')
+    const [symbol, setsymbol] = useState('')
+    const [description, setdescription] = useState('')
+    const [royalties, setRoyalties] = useState('')
+    const [editions, setEditions] = useState('')
+    const [price, setprice] = useState('')
     // const [ipfsHash, setipfsHash] = useState(null);
-    const [videoHash, setVideoHash] = useState(null);
-    const [imageHash, setImageHash] = useState(null);
+    const [videoHash, setVideoHash] = useState(null)
+    const [imageHash, setImageHash] = useState(null)
     // const [accounts, setaccounts] = useState([]);
-    const [Loading, setLoading] = useState(false);
-    const [videoUpload, setvideoUpload] = useState(false);
-    const [imageUpload, setimageUpload] = useState(false);
-    const [selectedVideo, setselectedVideo] = useState(null);
-    const [selectedImage, setselectedImage] = useState(null);
+    const [Loading, setLoading] = useState(false)
+    const [videoUpload, setvideoUpload] = useState(false)
+    const [imageUpload, setimageUpload] = useState(false)
+    const [selectedVideo, setselectedVideo] = useState(null)
+    const [selectedImage, setselectedImage] = useState(null)
 
-    let history = useHistory();
+    let history = useHistory()
 
     const pinVideoToIPFS = async (e) => {
-        e.preventDefault();
-        setvideoUpload(true);
-        const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-        const data = new FormData();
-        data.append('file', selectedVideo);
+        e.preventDefault()
+        setvideoUpload(true)
+        const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`
+        const data = new FormData()
+        data.append('file', selectedVideo)
         // alert("pinning to pinata")
         try {
             // const accounts = await web3.eth.getAccounts();
@@ -47,25 +47,25 @@ const Create = ({ account, isMobile }) => {
                 headers: {
                     'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
                     pinata_api_key: pinataApiKey,
-                    pinata_secret_api_key: pinataSecretApiKey,
-                },
-            });
-            setVideoHash(res.data.IpfsHash);
+                    pinata_secret_api_key: pinataSecretApiKey
+                }
+            })
+            setVideoHash(res.data.IpfsHash)
             // alert(res.data.IpfsHash)
-            setvideoUpload(false);
-            console.log(res.data);
+            setvideoUpload(false)
+            console.log(res.data)
         } catch (err) {
-            console.log(err);
-            setvideoUpload(false);
+            console.log(err)
+            setvideoUpload(false)
         }
-    };
+    }
 
     const pinImageToIPFS = async (e) => {
-        e.preventDefault();
-        setimageUpload(true);
-        const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-        const data = new FormData();
-        data.append('file', selectedImage);
+        e.preventDefault()
+        setimageUpload(true)
+        const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`
+        const data = new FormData()
+        data.append('file', selectedImage)
         // alert("pinning to pinata")
         try {
             // const accounts = await web3.eth.getAccounts();
@@ -75,22 +75,22 @@ const Create = ({ account, isMobile }) => {
                 headers: {
                     'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
                     pinata_api_key: pinataApiKey,
-                    pinata_secret_api_key: pinataSecretApiKey,
-                },
-            });
-            setImageHash(res.data.IpfsHash);
+                    pinata_secret_api_key: pinataSecretApiKey
+                }
+            })
+            setImageHash(res.data.IpfsHash)
             // alert(res.data.IpfsHash)
-            setimageUpload(false);
-            console.log(res.data);
+            setimageUpload(false)
+            console.log(res.data)
         } catch (err) {
-            console.log(err);
-            setimageUpload(false);
+            console.log(err)
+            setimageUpload(false)
         }
-    };
+    }
 
     const metadata = {
         pinataMetadata: {
-            name: `${name}.json`,
+            name: `${name}.json`
         },
         pinataContent: {
             name: name,
@@ -106,19 +106,19 @@ const Create = ({ account, isMobile }) => {
                 {
                     display_type: 'number',
                     trait_type: 'Total Editions',
-                    value: editions,
-                },
-            ],
-        },
-    };
+                    value: editions
+                }
+            ]
+        }
+    }
 
     // const {name, symbol, description, category, imageHash, videoHash} = metadata.pinataContent;
 
     const onCreateNewNFT = async (event) => {
-        event.preventDefault();
-        setLoading(true);
+        event.preventDefault()
+        setLoading(true)
 
-        const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+        const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`
 
         try {
             const res = await axios.post(url, metadata, {
@@ -127,9 +127,9 @@ const Create = ({ account, isMobile }) => {
                 headers: {
                     // 'Content-Type': `application/json; boundary=${data._boundary}`,
                     pinata_api_key: pinataApiKey,
-                    pinata_secret_api_key: pinataSecretApiKey,
-                },
-            });
+                    pinata_secret_api_key: pinataSecretApiKey
+                }
+            })
 
             // if (!res.success) {
             //     return {
@@ -139,8 +139,8 @@ const Create = ({ account, isMobile }) => {
             //     };
             // }
 
-            console.log(res.data);
-            const tokenURI = res.data.IpfsHash;
+            console.log(res.data)
+            const tokenURI = res.data.IpfsHash
 
             // contract will have name, symbol, tokenUri - ERC721 constructor(name, symbol)
             await PrntNFTFactory.methods
@@ -153,8 +153,8 @@ const Create = ({ account, isMobile }) => {
                     royalties
                 )
                 .send({
-                    from: account,
-                });
+                    from: account
+                })
 
             // await PrntNFTFactory.methods
             //     .createNewPrntNFT(
@@ -167,20 +167,20 @@ const Create = ({ account, isMobile }) => {
             //     .send({
             //         from: account,
             //     });
-            setLoading(false);
+            setLoading(false)
             // // alert("NFT minted successfully!")
             // return <Redirect to="/music" />;
-            history.push('/music');
+            history.push('/music')
             // window.location.reload();
         } catch (err) {
-            console.log(err);
-            setLoading(false);
+            console.log(err)
+            setLoading(false)
             // return <Redirect to="/music" />;
             // history.push('/music');
 
-            alert('Enter values correctly.', err);
+            alert('Enter values correctly.', err)
         }
-    };
+    }
 
     return (
         <div className="create-nfts-container">
@@ -193,13 +193,7 @@ const Create = ({ account, isMobile }) => {
                         {/* <h2 style={{ margin: '10px 50px 10px 50px' }}>Create NFTS</h2> */}
                         <div className="uploads">
                             {!videoHash ? (
-                                <div
-                                    className={
-                                        isMobile
-                                            ? 'upload-file mobile'
-                                            : 'upload-file'
-                                    }
-                                >
+                                <div className={isMobile ? 'upload-file mobile' : 'upload-file'}>
                                     <div className="upload-text">
                                         <h3>Upload Video</h3>
                                     </div>
@@ -212,18 +206,11 @@ const Create = ({ account, isMobile }) => {
                                                 accept="video/mp4,video/x-m4v,video/*"
                                                 // value={selectedFile || ''}
                                                 onChange={(e) =>
-                                                    setselectedVideo(
-                                                        e.target.files[0]
-                                                    )
+                                                    setselectedVideo(e.target.files[0])
                                                 }
                                             />
-                                            <button
-                                                type="submit"
-                                                className="btn"
-                                            >
-                                                {!videoUpload && (
-                                                    <h4>Upload Video</h4>
-                                                )}
+                                            <button type="submit" className="btn">
+                                                {!videoUpload && <h4>Upload Video</h4>}
                                                 {videoUpload && (
                                                     <ReactLoading
                                                         type={'bubbles'}
@@ -236,34 +223,17 @@ const Create = ({ account, isMobile }) => {
                                     </div>
                                 </div>
                             ) : (
-                                <div
-                                    className={
-                                        isMobile
-                                            ? 'upload-file mobile'
-                                            : 'upload-file'
-                                    }
-                                >
-                                    <h2 style={{ color: '#a3d0d2db' }}>
-                                        Video Uploaded!
-                                    </h2>
+                                <div className={isMobile ? 'upload-file mobile' : 'upload-file'}>
+                                    <h2 style={{ color: '#a3d0d2db' }}>Video Uploaded!</h2>
                                     <span>{selectedVideo.name}</span>
                                     {/* <h4 style={{marginTop: "40px"}}>Please enter rest details...</h4> */}
                                 </div>
                             )}
                             {!imageHash ? (
-                                <div
-                                    className={
-                                        isMobile
-                                            ? 'upload-file mobile'
-                                            : 'upload-file'
-                                    }
-                                >
+                                <div className={isMobile ? 'upload-file mobile' : 'upload-file'}>
                                     <div className="upload-text">
                                         <h3>Upload Thumbnail</h3>
-                                        <p>
-                                            We recommend image size to be 282px
-                                            x 260px.
-                                        </p>
+                                        <p>We recommend image size to be 282px x 260px.</p>
                                     </div>
                                     <div className="choose-file">
                                         <form onSubmit={pinImageToIPFS}>
@@ -274,18 +244,11 @@ const Create = ({ account, isMobile }) => {
                                                 accept="image/*"
                                                 // value={selectedFile || ''}
                                                 onChange={(e) =>
-                                                    setselectedImage(
-                                                        e.target.files[0]
-                                                    )
+                                                    setselectedImage(e.target.files[0])
                                                 }
                                             />
-                                            <button
-                                                type="submit"
-                                                className="btn"
-                                            >
-                                                {!imageUpload && (
-                                                    <h4>Upload Cover</h4>
-                                                )}
+                                            <button type="submit" className="btn">
+                                                {!imageUpload && <h4>Upload Cover</h4>}
                                                 {imageUpload && (
                                                     <ReactLoading
                                                         type={'bubbles'}
@@ -298,16 +261,8 @@ const Create = ({ account, isMobile }) => {
                                     </div>
                                 </div>
                             ) : (
-                                <div
-                                    className={
-                                        isMobile
-                                            ? 'upload-file mobile'
-                                            : 'upload-file'
-                                    }
-                                >
-                                    <h2 style={{ color: '#a3d0d2db' }}>
-                                        Cover Uploaded!
-                                    </h2>
+                                <div className={isMobile ? 'upload-file mobile' : 'upload-file'}>
+                                    <h2 style={{ color: '#a3d0d2db' }}>Cover Uploaded!</h2>
                                     <span>{selectedImage.name}</span>
                                     {/* <h4 style={{marginTop: "40px"}}>Please enter rest details...</h4> */}
                                 </div>
@@ -319,10 +274,7 @@ const Create = ({ account, isMobile }) => {
                     <div className="preview-field">
                         <PreviewCard
                             title={`# ${name} - ${symbol}`}
-                            username={`${account.slice(
-                                0,
-                                6
-                            )}....${account.slice(-7, -1)}`}
+                            username={`${account.slice(0, 6)}....${account.slice(-7, -1)}`}
                             price={`${price} ETH`}
                             imageUrl={`https://ipfs.io/ipfs/${imageHash}`}
                             editions={editions}
@@ -368,9 +320,7 @@ const Create = ({ account, isMobile }) => {
                                     placeholder="Editions"
                                     title="No. of Editions (Integers only, Maximum 10 allowed)"
                                     value={editions}
-                                    onChange={(e) =>
-                                        setEditions(e.target.value)
-                                    }
+                                    onChange={(e) => setEditions(e.target.value)}
                                 />
                             </div>
                             <div className="nft-royalties">
@@ -383,9 +333,7 @@ const Create = ({ account, isMobile }) => {
                                     className="user-input small"
                                     placeholder="Royalties in %"
                                     value={`${royalties}`}
-                                    onChange={(e) =>
-                                        setRoyalties(e.target.value)
-                                    }
+                                    onChange={(e) => setRoyalties(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -408,7 +356,7 @@ const Create = ({ account, isMobile }) => {
                                 display: 'grid',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                padding: '10px 0px',
+                                padding: '10px 0px'
                             }}
                         >
                             <p style={{ fontFamily: 'cursive' }}>
@@ -424,18 +372,16 @@ const Create = ({ account, isMobile }) => {
                 type="submit"
                 className="btn"
                 style={{
-                    marginTop: '20px',
+                    marginTop: '20px'
                 }}
                 onClick={onCreateNewNFT}
                 disabled={Loading}
             >
-                {Loading && (
-                    <ReactLoading type={'bubbles'} height={30} width={30} />
-                )}
+                {Loading && <ReactLoading type={'bubbles'} height={30} width={30} />}
                 {!Loading && <h4>Create</h4>}
             </button>
         </div>
-    );
-};
+    )
+}
 
-export default Create;
+export default Create
